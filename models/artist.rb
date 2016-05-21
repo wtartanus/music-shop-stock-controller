@@ -25,6 +25,14 @@ class Artist
     SqlRunner.run( sql )
   end
 
+  def albums()
+    sql = " SELECT albums.* FROM albums 
+    INNER JOIN inventory ON albums.id = inventory.album_id
+    WHERE inventory.artist_id = #{ @id } "
+    result = Album.map_items( sql )
+    return result
+  end
+
   def self.all()
     sql = "SELECT * FROM artists"
     result = Artist.map_items( sql )

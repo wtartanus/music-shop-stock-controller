@@ -1,6 +1,6 @@
 DROP TABLE artists;
 DROP TABLE albums;
-DROP TABLE shop;
+DROP TABLE inventory;
 
 CREATE TABLE artists(
   id SERIAL4 primary key,
@@ -10,14 +10,14 @@ CREATE TABLE artists(
 CREATE TABLE albums(
   id SERIAL4 primary key,
   name VARCHAR(255),
-  gender VARCHAR(1),
+  gender VARCHAR(255),
   price_buying INT4,
   price_selling INT4,
   stock INT4
 );
 
-CREATE TABLE shop(
+CREATE TABLE inventory(
   id SERIAL4 primary key,
-  artist_id INT4 references artists ( id ),
-  albums_id INT4 references albums ( id )
+  artist_id INT4 references artists ( id ) ON DELETE CASCADE,
+  album_id INT4 references albums ( id ) ON DELETE CASCADE
 );
