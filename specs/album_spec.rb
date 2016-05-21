@@ -53,6 +53,11 @@ class TestAlbum < MiniTest::Test
     assert_equal( 9, @album.stock )
   end
 
+  def test_profit
+    profit = @album.profit()
+    assert_equal( 150,profit)
+  end
+
 end
 
 
