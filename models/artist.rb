@@ -39,6 +39,12 @@ class Artist
     return result
   end
 
+  def self.find( id )
+    sql = "SELECT * FROM artists WHERE id = #{ id }"
+    result = Artist.map_item( sql )
+    return result
+  end
+
   def self.sort_name( artists )
     result = artists.sort_by { |artist| artist.name }
     return result
