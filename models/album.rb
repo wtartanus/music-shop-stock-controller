@@ -25,6 +25,15 @@ class Album
     return Album.new( album )
   end
 
+  def artist()
+    sql = "SELECT artists.* FROM artists
+           INNER JOIN inventory ON artists.id = inventory.artist_id
+           WHERE inventory.album_id = #{@id}"
+
+      result = Artist.map_items( sql )
+      return result.first
+  end
+
 
   def profit()
     spend_money = @price_buying * @stock
@@ -32,6 +41,40 @@ class Album
     profit = incoming_money - spend_money
     return profit
   end
+
+  #SORT FUNCTIONS ###################
+
+  def self.sort_gender( albums )
+    result = albums.sort_by { |album| album.gender }
+    return result
+  end
+
+  def self.sort_name( albums )
+    result = albums.sort_by { |album| album.name }
+    return result
+  end
+
+  def self.sort_price_buying_min( albums )
+    result = albums.sort_by { |album| album.price_buying }
+    return result
+  end
+
+  def self.sort_price_buying_max( albums )
+    result = albums.sort_by { |album| album.price_buying }
+    return result.reverse
+  end
+
+  def self.sort_price_selling_min( albums )
+    result = albums.sort_by { |album| album.price_selling }
+    return result
+  end
+
+  def self.sort_price_selling_max( albums )
+    result = albums.sort_by { |album| album.price_selling }
+    return result.reverse
+  end
+
+  ####################################
 
   def self.all()
     sql = "SELECT * FROM albums"

@@ -39,6 +39,11 @@ class Artist
     return result
   end
 
+  def self.sort_name( artists )
+    result = artists.sort_by { |artist| artist.name }
+    return result
+  end
+
   def self.delete_all()
     sql = "DELETE FROM artists"
     SqlRunner.run( sql )

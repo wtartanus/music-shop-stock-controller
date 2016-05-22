@@ -59,5 +59,33 @@ class Inventory
     SqlRunner.run( sql )
   end
 
+  def self.search_artist( name )
+    sql = "SELECT * FROM artists WHERE name = '#{name}'"
+    result = Artist.map_item( sql )
+    return result
+  end
+
+  def self.search_album( name )
+    sql = "SELECT * FROM albums WHERE name = '#{name}'"
+    result = Album.map_item( sql )
+    return result
+  end
+
+  def self.search( name )
+    if Inventory.search_artist( name ) != nil
+      return Inventory.search_artist( name )
+    else
+      Inventory.search_album( name )
+    end
+  end
+
 
 end
+
+
+
+
+
+
+
+
