@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+}
+
+header {
+  background-color: #88858C;
+  text-align: center;
+  padding-top: 10px;
+}
+
+header h1 {
+  font-family: 'Orbitron', sans-serif;
+  color: #C6C1CC;
+  margin-bottom: 15px;
+}
+
+nav a {
+  color: #4A484C;
+  font-family: 'Lilita One', cursive;
+  text-decoration: none;
+}
+
+nav li {
+  display: inline-block;
+  font-size: 1.6em;
+  margin-bottom: 15px;
+  margin-right: 40px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.container {
+  width: 90%;
+}
+
+.selected a{
+  color: white;
+}
+

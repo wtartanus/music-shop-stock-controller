@@ -20,15 +20,15 @@ class Artist
     return Artist.new( artist )
   end
 
-  def update()
-    sql = "UPDATE artists SET name = '#{ @name }' WHERE id = #{ @id }"
+  def self.update( options )
+    sql = "UPDATE artists SET name = '#{ options[:name] }' WHERE id = #{ options[:id] }"
     SqlRunner.run( sql )
   end
 
   def albums()
     sql = " SELECT albums.* FROM albums 
-    INNER JOIN inventory ON albums.id = inventory.album_id
-    WHERE inventory.artist_id = #{ @id } "
+    INNER JOIN discography ON albums.id = discography.album_id
+    WHERE discography.artist_id = #{ @id } "
     result = Album.map_items( sql )
     return result
   end
@@ -48,6 +48,11 @@ class Artist
   def self.sort_name( artists )
     result = artists.sort_by { |artist| artist.name }
     return result
+  end
+
+  def self.destroy( id )
+    sql = "DELETE FROM artists WHERE id = #{id}"
+    SqlRunner.run( sql )
   end
 
   def self.delete_all()

@@ -2,22 +2,22 @@ class Album
 
 
   attr_reader :id
-  attr_accessor :name, :gender, :price_buying, :price_selling, :stock
+  attr_accessor :name, :genre, :price_buying, :price_selling, :stock
 
   def initialize( options )
     @id = options[ 'id' ].to_i
     @name = options[ 'name' ]
-    @gender = options[ 'gender' ]
+    @genre = options[ 'genre' ]
     @price_buying = options[ 'price_buying' ].to_i
     @price_selling = options[ 'price_selling' ].to_i
     @stock = options[ 'stock' ].to_i
   end
 
   def save()
-    sql = "INSERT INTO albums (name, gender, price_buying, price_selling, stock) 
+    sql = "INSERT INTO albums (name, genre, price_buying, price_selling, stock) 
          VALUES ( 
          '#{@name}', 
-         '#{@gender}', 
+         '#{@genre}', 
          #{@price_buying}, 
          #{@price_selling}, 
          #{@stock}) RETURNING *"
@@ -27,11 +27,17 @@ class Album
 
   def artist()
     sql = "SELECT artists.* FROM artists
-           INNER JOIN inventory ON artists.id = inventory.artist_id
-           WHERE inventory.album_id = #{@id}"
+           INNER JOIN discography ON artists.id = discography.artist_id
+           WHERE discography.album_id = #{@id}"
 
       result = Artist.map_items( sql )
       return result.first
+  end
+
+  def self.find( id )
+    sql = "SELECT * FROM albums WHERE id = #{ id }"
+    result = Album.map_item( sql )
+    return result
   end
 
 
@@ -44,8 +50,8 @@ class Album
 
   #SORT FUNCTIONS ###################
 
-  def self.sort_gender( albums )
-    result = albums.sort_by { |album| album.gender }
+  def self.sort_genre( albums )
+    result = albums.sort_by { |album| album.genre }
     return result
   end
 
@@ -82,14 +88,19 @@ class Album
     return result
   end
 
-  def update()
+  def self.update( options )
     sql = "UPDATE albums SET 
-      name = '#{ @name }',
-      gender = '#{ @gender }',
-      price_buying = #{ @price_buying },
-      price_selling = #{ @price_selling },
-      stock = #{ @stock }
-       WHERE id = #{ @id }"
+      name = '#{ options[:name] }',
+      genre = '#{ options[:genre] }',
+      price_buying = #{ options[:price_buying] },
+      price_selling = #{ options[:price_selling] },
+      stock = #{ options[:stock] }
+       WHERE id = #{ options[:id] }"
+    SqlRunner.run( sql )
+  end
+
+  def self.destroy( id )
+    sql = "DELETE FROM albums WHERE id = #{id}"
     SqlRunner.run( sql )
   end
 

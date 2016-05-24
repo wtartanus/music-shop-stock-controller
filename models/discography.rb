@@ -1,7 +1,7 @@
 require( 'pry-byebug' )
 
 
-class Inventory
+class Discography
 
  
  attr_accessor :id, :artist_id, :album_id
@@ -10,17 +10,20 @@ class Inventory
     @id = options[ 'id' ].to_i
     @artist_id = options[ 'artist_id' ].to_i
     @album_id = options[ 'album_id' ].to_i
+    # @albums = Album.all
+    # @artists = Artist.all
   end
 
+
   def save()
-    sql = "INSERT INTO inventory ( artist_id, album_id)
+    sql = "INSERT INTO discography ( artist_id, album_id)
     VALUES ( #{@artist_id}, #{album_id}) RETURNING *"
-    return Inventory.map_item( sql )
+    return Discography.map_item( sql )
   end
 
   def self.all()
-    sql = "SELECT * FROM inventory"
-    result = Inventory.map_items( sql )
+    sql = "SELECT * FROM discography"
+    result = Discography.map_items( sql )
     return result
   end
 
@@ -44,18 +47,18 @@ class Inventory
   end
 
   def self.map_items( sql )
-    inventory = SqlRunner.run( sql )
-    result = inventory.map { |item| Inventory.new( item ) }
+    discography = SqlRunner.run( sql )
+    result = discography.map { |item| Discography.new( item ) }
     return result
   end
 
   def self.map_item( sql )
-    inventory = Inventory.map_items( sql )
-    return inventory.first
+    discography = Discography.map_items( sql )
+    return discography.first
   end
 
   def self.delete_all()
-    sql = "DELETE FROM inventory"
+    sql = "DELETE FROM discography"
     SqlRunner.run( sql )
   end
 
@@ -72,11 +75,25 @@ class Inventory
   end
 
   def self.search( name )
-    if Inventory.search_artist( name ) != nil
-      return Inventory.search_artist( name )
+    if Discography.search_artist( name ) != nil
+      return Discography.search_artist( name )
     else
-      Inventory.search_album( name )
+      return Discography.search_album( name )
     end
+  end
+
+  def self.check( options, albums )
+    result = albums
+    if options[:sort] == "asc" && options[:by] == "price_sell_max"
+      result = Album.sort_price_selling_max( albums )
+    elsif options[:sort] == "des" && options[:by] == "price_sell_min"
+      result = Album.sort_price_selling_min( albums )
+    elsif options[:sort] == "asc" && options[:by] == "price_buying_max"
+      result = Album.sort_price_buying_max( albums )
+    elsif options[:sort] == "des" && options[:by] == "price_buying_min"
+      result = Album.sort_price_buying_min( albums )
+    end
+    return result 
   end
 
 
