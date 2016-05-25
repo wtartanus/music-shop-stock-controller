@@ -2,6 +2,7 @@ require( 'pry-byebug' )
 require_relative( 'artist.rb' )
 require_relative( 'album.rb' )
 require_relative( 'discography.rb' )
+require_relative( 'shop.rb' )
 require_relative( '../db/sql_runner.rb')
 
 Discography.delete_all()

@@ -37,7 +37,7 @@ end
 put '/artists/:id' do
   #UPDATE
   @artist = Artist.update( params )
-  redirect to( "/artists/#{ params[:id]}")
+  redirect to( "/stock")
 end
 
 delete '/artists/:id' do

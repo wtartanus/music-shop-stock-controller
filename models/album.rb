@@ -41,46 +41,9 @@ class Album
   end
 
 
-  def profit()
-    spend_money = @price_buying * @stock
-    incoming_money = @price_selling * @stock
-    profit = incoming_money - spend_money
-    return profit
-  end
+ 
 
-  #SORT FUNCTIONS ###################
 
-  def self.sort_genre( albums )
-    result = albums.sort_by { |album| album.genre }
-    return result
-  end
-
-  def self.sort_name( albums )
-    result = albums.sort_by { |album| album.name }
-    return result
-  end
-
-  def self.sort_price_buying_min( albums )
-    result = albums.sort_by { |album| album.price_buying }
-    return result
-  end
-
-  def self.sort_price_buying_max( albums )
-    result = albums.sort_by { |album| album.price_buying }
-    return result.reverse
-  end
-
-  def self.sort_price_selling_min( albums )
-    result = albums.sort_by { |album| album.price_selling }
-    return result
-  end
-
-  def self.sort_price_selling_max( albums )
-    result = albums.sort_by { |album| album.price_selling }
-    return result.reverse
-  end
-
-  ####################################
 
   def self.all()
     sql = "SELECT * FROM albums"

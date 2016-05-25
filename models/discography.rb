@@ -10,8 +10,6 @@ class Discography
     @id = options[ 'id' ].to_i
     @artist_id = options[ 'artist_id' ].to_i
     @album_id = options[ 'album_id' ].to_i
-    # @albums = Album.all
-    # @artists = Artist.all
   end
 
 
@@ -33,12 +31,7 @@ class Discography
     return result
   end
 
-  def self.profit_all()
-    albums = Album.all
-    prices = albums.map { |album| album.profit }
-    profit = prices.inject(0) { |x, num| x + num }
-    return profit
-  end
+ 
 
   def album()
     sql = "SELECT * FROM albums WHERE id = '#{@album_id}'"
@@ -82,19 +75,7 @@ class Discography
     end
   end
 
-  def self.check( options, albums )
-    result = albums
-    if options[:sort] == "asc" && options[:by] == "price_sell_max"
-      result = Album.sort_price_selling_max( albums )
-    elsif options[:sort] == "des" && options[:by] == "price_sell_min"
-      result = Album.sort_price_selling_min( albums )
-    elsif options[:sort] == "asc" && options[:by] == "price_buying_max"
-      result = Album.sort_price_buying_max( albums )
-    elsif options[:sort] == "des" && options[:by] == "price_buying_min"
-      result = Album.sort_price_buying_min( albums )
-    end
-    return result 
-  end
+
 
 
 end

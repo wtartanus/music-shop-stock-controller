@@ -45,7 +45,7 @@ end
 put '/albums/:id' do
   #UPDATE
   @album = Album.update( params )
-  redirect to( "/albums/#{ params[:id]}")
+  redirect to( "/stock")
 end
 
 delete '/albums/:id' do
