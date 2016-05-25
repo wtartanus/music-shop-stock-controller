@@ -23,7 +23,7 @@ post '/albums' do
   album = album.save
   options = { 'artist_id' => params[:artist_id], 'album_id' => album.id }
   Discography.new( options ).save
-  redirect to( "/albums")
+  redirect to( "/stock")
 end
 
 get '/albums/:id' do

@@ -19,6 +19,7 @@ post '/artists' do
   #CREATE
   artist = Artist.new( params )
   artist.save()
+  redirect to( "/stock")
 end
 
 get '/artists/:id' do

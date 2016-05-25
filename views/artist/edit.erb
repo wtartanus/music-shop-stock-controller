@@ -1,8 +1,14 @@
+<div class="artist-edit-container">
+
+<div class="artist-edit">
 <form action="/artists/<%= @artist.id %>" method="post">
  <input type="hidden" name="_method" value="put">
- <label for="name">Artist:</label>
- <input type="text" name="name" value="<%= @artist.name %>">
+ <label for="name">Artist:</label><br>
+ <input type="text" name="name" value="<%= @artist.name %>"><br>
 
- <input type="submit" value="Save">
+ <button type="submit">Save</button>
   
 </form>
+</div>
+
+</div>

@@ -1,13 +1,5 @@
-<header>
-<h1>Stock Control</h1>
-  <nav>
-    <ul>
-      <li ><a href="/">Home</a></li>
-      <li class="selected"><a href="/stock">Stock</a></li>
-    </ul>
-  </nav>
-</header>
- <div class="container">
+
+
   
 
   <div class="search" >
@@ -26,10 +18,9 @@
          <nav>
              <a href="/stock?sort=asc&by=price_sell_max">Price Selling &#65514;</a>
              <a href="/stock?sort=des&by=price_sell_min">Price Selling &#65516;</a>
-             <a href="/stock?sort=asc&by=price_buying_min">Buy Price &#65514;</a>
-             <a href="/stock?sort=des&by=price_buying_min">Buy Price &#65516;</a>
+             <a href="/stock?sort=asc&by=price_buying_min">Price Buying &#65514;</a>
+             <a href="/stock?sort=des&by=price_buying_min">Price Buying &#65516;</a>
          </nav>
-         <label for="select">Sort</label>
        
 
 
@@ -45,14 +36,17 @@
 
 
      <% @artists.each do |artist| %>
-       
+            <div class="artist-container">
              <span class="artist"> <%= artist.name %> </span>
               <form action="/artists/<%= artist.id%>" method="post">
                <input type="hidden" name="_method" value="delete">
                <button><a href="/artists/<%= artist.id%>/edit">Edit</a></button>
                <button type="submit">Delete</button>
-                
+          
               </form>
+            </div>
+
+
              <table>
               <tr>
               <th>Name</th>
@@ -95,4 +89,3 @@
    </div>
    
 
- </div>

@@ -1,27 +1,32 @@
-<form action="/albums" method="post">
 
-<label for="artist_id">Artist:</label>
-<select name="artist_id">
-<% @artists.each do |artist|%>
-  <option name="artist_id" value="<%= artist.id%>"><%= artist.name%></option>
-<% end %>
-</select>
+<div class="album-new-container">
+    <div class="album-new">
+        <form action="/albums" method="post">
 
-<label for="name">Name:</label>
-<input type="text" name="name">
+        <label for="artist_id">Artist:</label>
+        <select name="artist_id">
+        <% @artists.each do |artist|%>
+          <option name="artist_id" value="<%= artist.id%>"><%= artist.name%></option>
+        <% end %>
+        </select><br>
 
-<label for="gender">Gender:</label>
-<input type="text" name="gender"><br>
+        <label for="name">Name:</label><br>
+        <input type="text" name="name"><br>
 
-<label for="price_buying">Price Buying:</label>
-<input type="text" name="price_buying">
+        <label for="genre">Genre:</label><br>
+        <input type="text" name="genre"><br>
 
-<label for="price_selling">Price Selling:</label>
-<input type="text" name="price_selling">
+        <label for="price_buying">Price Buying:</label><br>
+        <input type="text" name="price_buying"><br>
 
-<label for="stock">Stock:</label>
-<input type="text" name="stock">
+        <label for="price_selling">Price Selling:</label><br>
+        <input type="text" name="price_selling"><br>
 
-<input type="submit" value="save">
-  
-</form>
+        <label for="stock">Stock:</label><br>
+        <input type="text" name="stock"><br>
+
+        <input type="submit" value="save">
+          
+        </form>
+    </div>
+</div>
