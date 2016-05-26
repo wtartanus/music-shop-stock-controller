@@ -171,7 +171,8 @@ hr {
   text-align: center;
 }
 
-.artist-new h2 {
+.artist-new h2,
+.album-new h2 {
   margin-bottom: 10px;
   letter-spacing: .1em;
 }
@@ -208,6 +209,10 @@ hr {
   background-color: rgba(0,0,0,.1)
   margin-bottom: 5px;
   margin-top: 5px;
+}
+
+.low-stock {
+  color: red;
 }
 
 

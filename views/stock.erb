@@ -64,7 +64,8 @@
                <td> <%= album.genre %></td>
                <td> £<%= album.price_buying%></td>
                <td> £<%= album.price_selling %></td>
-               <td> <%= album.stock %></td>
+               <td class="<%= 'low-stock' if album.stock < 10 %>"> 
+               <%= album.stock %></td>
                
                <td> £<%= Shop.profit( album ) %></td>
               </tr>
