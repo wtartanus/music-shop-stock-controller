@@ -15,17 +15,17 @@ get '/' do
 end
 
 get '/stock' do
-  @artists = Artist.all 
+  @artists = Artist.all
   @options = params
-  
+
   erb :stock
 end
 
 get '/stock/search' do
   name = params.values.first
 
-  @result = Discography.search( name)
- 
+  @result = Discography.search( name.downcase )
+
   if @result.class == Artist
     @artist = @result
     @albums = @artist.albums()

@@ -14,12 +14,12 @@ class Album
   end
 
   def save()
-    sql = "INSERT INTO albums (name, genre, price_buying, price_selling, stock) 
-         VALUES ( 
-         '#{@name}', 
-         '#{@genre}', 
-         #{@price_buying}, 
-         #{@price_selling}, 
+    sql = "INSERT INTO albums (name, genre, price_buying, price_selling, stock)
+         VALUES (
+         '#{@name}',
+         '#{@genre}',
+         #{@price_buying},
+         #{@price_selling},
          #{@stock}) RETURNING *"
     album = SqlRunner.run( sql ).first
     return Album.new( album )
@@ -41,7 +41,7 @@ class Album
   end
 
 
- 
+
 
 
 
@@ -52,7 +52,7 @@ class Album
   end
 
   def self.update( options )
-    sql = "UPDATE albums SET 
+    sql = "UPDATE albums SET
       name = '#{ options[:name] }',
       genre = '#{ options[:genre] }',
       price_buying = #{ options[:price_buying] },
@@ -77,6 +77,7 @@ class Album
   def self.map_items( sql )
      albums = SqlRunner.run( sql )
      result = albums.map { |album| Album.new( album ) }
+     result = Shop.capitalize_string(result)
      return result
   end
 
