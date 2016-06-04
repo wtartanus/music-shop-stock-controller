@@ -22,18 +22,19 @@ get '/stock' do
 end
 
 get '/stock/search' do
-  name = params.values.first
-
-  @result = Discography.search( name.downcase )
-
+  @name = params.values.first
+  @artists = Artist.all
+  @result = Discography.search( @name.downcase )
   if @result.class == Artist
     @artist = @result
     @albums = @artist.albums()
     erb :'artist/edit'
-  else
+  elsif @result.class == Album
     @album = @result
     @artist = @album.artist()
     erb :'album/edit'
+  else
+    erb :wrong_search
   end
 
 end
