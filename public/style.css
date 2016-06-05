@@ -215,6 +215,22 @@ hr {
   color: red;
 }
 
+.wrong_search {
+  border: 1px solid;
+  height: 550px;
+  background-image: url("note.jpg");
+  background-size: 60%;
+  background-position: right;
+  border: 1px solid white;
+  background-repeat: no-repeat;
+  padding-left: 17%;
+  padding-top: 5%;
+}
+
+.wrong_search p {
+  margin: 5px;
+}
+
 
 
 

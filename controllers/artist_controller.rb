@@ -24,7 +24,6 @@ post '/artists' do
 end
 
 get '/artists/:id' do
-  #SHOW
   @artist = Artist.find( params[:id])
   @albums = @artist.albums()
   erb :'artist/show'

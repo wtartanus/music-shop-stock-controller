@@ -1,6 +1,8 @@
-<p>Unfonutrelly <u><%= @name %></u> wasn't find</p>
-<p>You can repeat your search :</p>
-<div class="search" >
+<div class="wrong_search">
+
+<p>Unfonutrelly <strong><u><%= @name %></u></strong> wasn't find.</p>
+<p>You can repeat your search</p>
+<div>
   <form action="/stock/search" method="get">
     <input type="text" name="search-text">
     <button type="submit">Search</button>
@@ -9,34 +11,40 @@
 
 <p>Or you can add missing item</p>
 
-<div class="album-new-container">
-    <div class="album-new">
-      <h2>Add Album</h2>
-        <form action="/albums" method="post">
+<div>
 
-        <label for="artist_id">Artist:</label>
-        <select name="artist_id">
-        <% @artists.each do |artist|%>
-          <option name="artist_id" value="<%= artist.id%>"><%= artist.name%></option>
-        <% end %>
-        </select><br>
+    <div >
+    <h2>Add Record</h2>
 
-        <label for="name">Name:</label><br>
-        <input type="text" name="name"><br>
+    <form action="/stock" method='post' >
 
-        <label for="genre">Genre:</label><br>
-        <input type="text" name="genre"><br>
 
-        <label for="price_buying">Price Buying:</label><br>
-        <input type="text" name="price_buying"><br>
+            <label for="artist_id">Artist:</label><br>
+            <input list="artists" type="text" name="artist_name">
+            <datalist id="artists">
 
-        <label for="price_selling">Price Selling:</label><br>
-        <input type="text" name="price_selling"><br>
+            <% @artists.each do |artist|%>
+              <option name="artist" value="<%= artist.name%>"><%= artist.name%></option>
+            <% end %>
+            </datalist><br>
 
-        <label for="stock">Stock:</label><br>
-        <input type="text" name="stock"><br>
+            <label for="name">Name:</label><br>
+            <input type="text" name="name"><br>
 
-        <input type="submit" value="save">
+            <label for="genre">Genre:</label><br>
+            <input type="text" name="genre"><br>
 
-        </form>
+            <label for="price_buying">Price Buying:</label><br>
+            <input type="text" name="price_buying"><br>
+
+            <label for="price_selling">Price Selling:</label><br>
+            <input type="text" name="price_selling"><br>
+
+            <label for="stock">Stock:</label><br>
+            <input type="text" name="stock"><br>
+
+            <input type="submit" value="save">
+              
+            </form>
+    </div>
     </div>

@@ -28,7 +28,7 @@ get '/stock/search' do
   if @result.class == Artist
     @artist = @result
     @albums = @artist.albums()
-    erb :'artist/edit'
+    erb :'artist/show'
   elsif @result.class == Album
     @album = @result
     @artist = @album.artist()
