@@ -38,3 +38,14 @@ get '/stock/search' do
   end
 
 end
+
+get '/stock/new' do
+  #NEW
+  @artists = Artist.all
+  erb :new
+end
+
+post '/stock' do
+  Discography.save_record( params )
+  redirect to("/stock")
+end

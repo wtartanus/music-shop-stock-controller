@@ -39,6 +39,25 @@ class Discography
     return result
   end
 
+  def self.save_record( options )
+    artist = Artist.find_by_name(options['artist_name'].downcase)
+    if artist == nil
+     artist = Artist.new( {'name' => options['artist_name'].downcase} )
+     artist = artist.save()
+    end
+
+    album = Album.new( { 'name' => options['name'].downcase, 
+      'genre' => options['genre'].downcase,
+     'price_buying' => options['price_buying'], 
+     'price_selling' => options['price_selling'], 
+     'stock' => options['stock']} )
+
+    album = album.save()
+
+    record = Discography.new({ 'artist_id' => artist.id, 'album_id' => album.id })
+    record.save()
+  end
+
   def self.map_items( sql )
     discography = SqlRunner.run( sql )
     result = discography.map { |item| Discography.new( item ) }

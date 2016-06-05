@@ -12,7 +12,8 @@ end
 
 get '/artists/new' do
   #NEW
-  erb :'artist/new'
+  @artists = Artist.all
+  erb :'new'
 end
 
 post '/artists' do
