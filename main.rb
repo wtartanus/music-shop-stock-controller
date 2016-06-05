@@ -15,10 +15,10 @@ get '/' do
 end
 
 get '/stock' do
+  @edit = params
   @artists = Artist.all
   @options = params
-
-  erb :stock
+  erb :stock_new
 end
 
 get '/stock/search' do

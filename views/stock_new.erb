@@ -1,0 +1,126 @@
+
+
+
+
+<div class="search" >
+  <form action="/stock/search" method="get">
+    <input type="text" name="search-text">
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+
+
+
+
+ <div class="stock">
+     <h3>Sort By</h3>
+       <nav>
+           <a href="/stock?sort=asc&by=price_sell_max">Price Selling &#65514;</a>
+           <a href="/stock?sort=des&by=price_sell_min">Price Selling &#65516;</a>
+           <a href="/stock?sort=asc&by=price_buying_min">Price Buying &#65514;</a>
+           <a href="/stock?sort=des&by=price_buying_min">Price Buying &#65516;</a>
+       </nav>
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <% @artists.each do |artist| %>
+          <div class="artist-container">
+           <span class="artist"> <%= artist.name %> </span>
+            <form action="/artists/<%= artist.id%>" method="post">
+             <input type="hidden" name="_method" value="delete">
+             <button><a href="/artists/<%= artist.id%>/edit">Edit</a></button>
+             <button type="submit">Delete</button>
+        
+            </form>
+          </div>
+
+
+           <table>
+            <tr>
+            <th>Name</th>
+            <th>Genre</th>
+            <th>Buy Price</th>
+            <th>Selling Price</th>
+            <th>Stock</th>
+            <th>Profit</th>
+            </tr>
+            <tr>
+             <% albums_list = artist.albums %>
+             <% result = Shop.check(@options,albums_list) %>
+             <% result.each do |album| %>
+          
+             <%if album.id == @edit['id'].to_i%>
+                <form action="/albums/<%= album.id %>" method="post">
+                 <input type="hidden" name="_method" value="put">
+                       <td><input type="text" name="name" value="<%= album.name %>" autofocus></td>
+                       <td><input type="text" name="genre" value="<%= album.genre %>"></td>
+                       <td><input type="text" name="price_buying" value="<%= album.price_buying%>"></td>
+                       <td><input type="text" name="price_selling" value="<%= album.price_selling %>"></td>
+                       <td class="<%= 'low-stock' if album.stock < 10 %>"> 
+                       <input type="text" name="stock" value="<%= album.stock %>">
+                       </td>
+                       
+                       <td> £<%= Shop.profit( album ) %></td>
+                    
+                  </tr>
+                  <tr>
+                   <td colspan="6">
+                    
+                      <button type="submit">Save</button>
+                    
+                   </td>
+                  </tr>
+                 </form>
+                <% else %>
+
+
+
+
+
+              
+
+               
+                 <td><%= album.name %></td>
+                 <td> <%= album.genre %></td>
+                 <td> £<%= album.price_buying%></td>
+                 <td> £<%= album.price_selling %></td>
+                 <td class="<%= 'low-stock' if album.stock < 10 %>"> 
+                 <%= album.stock %></td>
+                 
+                 <td> £<%= Shop.profit( album ) %></td>
+            </tr>
+            <tr>
+             <td colspan="6">
+              <form action="/albums/<%= album.id %>" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button><a href="/stock?edit=true&class=album&id=<%=album.id%>">Edit</a></button>
+                <button type="submit">Delete</button>
+              </form>
+             </td>
+            </tr>
+
+           <%end%>
+
+
+             
+              
+
+             <% end %>
+            </table>
+            <hr>
+   <% end %>
+ </div>
+ 
+
