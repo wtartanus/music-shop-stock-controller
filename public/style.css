@@ -119,20 +119,23 @@ table button {
 
 
 
-.stock table {
+.stock table,
+.artist-container table {
  margin: 0 auto;
  padding: 5px;
  text-align: center;
  margin-bottom: 10px;
 }
 
-.stock table th {
+.stock table th,
+.artist-container table {
   padding: 7px;
   color:  #787878;
 
 }
 
-.stock table td { 
+.stock table td,
+.artist-container table  { 
     margin-bottom: 15px;
     margin-left: 15px;
   }
@@ -231,6 +234,10 @@ hr {
   margin: 5px;
 }
 
+
+.artist-container table {
+  margin: 0 auto;
+}
 
 
 
