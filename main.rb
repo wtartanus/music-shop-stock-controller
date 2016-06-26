@@ -48,3 +48,14 @@ post '/stock' do
   Discography.save_record( params )
   redirect to("/stock")
 end
+
+get '/statistics' do
+  @albums = Album.all
+  @stats = Shop.statistic_by_genre
+  erb :statistics
+end
+
+
+
+
+
