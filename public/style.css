@@ -239,6 +239,19 @@ hr {
   margin: 0 auto;
 }
 
+#welcome-txt {
+  color: white;
+  text-shadow: 1px 1px 5px black;
+  font-family: 'Lilita One', cursive;
+  font-size: 5em;
+  line-height: .5em;
+  width: 25%;
+  position: relative;
+  left: 55%;
+  top: 35%;
+
+}
+
 
 
 

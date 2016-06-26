@@ -11,7 +11,7 @@ require_relative( './models/shop.rb' )
 get '/' do
   @albums = Album.all
   @stats = Shop.statistic_by_genre( @albums )
-
+  
   erb :home
 end
 
