@@ -31,6 +31,24 @@ class Discography
     return result
   end
 
+  def self.all_records
+    records = []
+    artists = Artist.all
+
+    for artist in artists
+     a = { name: artist.name, albums: []}
+     albums = artist.albums
+      for album in albums 
+          a[:albums] << album
+      
+      end
+     records << a
+    end
+
+    return records
+  end
+
+
  
 
   def album()

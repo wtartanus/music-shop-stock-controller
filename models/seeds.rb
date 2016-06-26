@@ -32,7 +32,7 @@ album3 = Album.new( { 'name' => 'magia', 'genre' => 'pop',
 album4 = Album.new( { 'name' => 'she Wolf', 'genre' => 'pop',
  'price_buying' => 7, 'price_selling' => 25, 'stock' => 40} )
 album5 = Album.new( { 'name' => 'shakira', 'genre' => 'pop',
-  'price_buying' => 6, 'price_selling' => 22, 'stock' => 39} )
+  'price_buying' => 6, 'price_selling' => 22, 'stock' => 7} )
 album6 = Album.new( { 'name' => 'anti', 'genre' => 'pop',
   'price_buying' => 4, 'price_selling' => 17, 'stock' => 40} )
 album7 = Album.new( { 'name' => 'gold Cobra', 'genre' => 'rock',
@@ -66,7 +66,6 @@ d5 = discography5.save()
 d6 = discography6.save()
 d7 = discography7.save()
 d8 = discography8.save()
-
 
 
 binding.pry

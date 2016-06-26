@@ -41,10 +41,6 @@ class Album
   end
 
 
-
-
-
-
   def self.all()
     sql = "SELECT * FROM albums"
     result = Album.map_items( sql )
@@ -60,6 +56,18 @@ class Album
       stock = #{ options[:stock] }
        WHERE id = #{ options[:id] }"
     SqlRunner.run( sql )
+  end
+
+  def self.check_low_stock
+    albums = Album.all()
+    albums_low_stock = []
+
+    for album in albums
+      if album.stock < 11
+        albums_low_stock << album
+      end
+    end
+  return albums_low_stock
   end
 
   def self.destroy( id )
