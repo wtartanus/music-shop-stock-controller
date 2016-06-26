@@ -32,18 +32,24 @@
 
 
 
-
-
-
    <% @artists.each do |artist| %>
           <div class="artist-container">
+          <% if artist.id == @edit['id'].to_i && @edit['class'] == "artist" %>
+            <form action="/artists/<%= artist.id %>" method="post">
+            <input type="hidden" name="_method" value="put">
+             <span class="artist"> 
+             <input type="text" name="name" value="<%= artist.name %>" autofocus> </span>
+             <button type="submit">Save</button>
+            </form>
+          <% else %>
            <span class="artist"> <%= artist.name %> </span>
             <form action="/artists/<%= artist.id%>" method="post">
              <input type="hidden" name="_method" value="delete">
-             <button><a href="/artists/<%= artist.id%>/edit">Edit</a></button>
+             <button><button><a href="/stock?edit=true&class=artist&id=<%=artist.id%>">Edit</a></button>
              <button type="submit">Delete</button>
         
             </form>
+            <% end %>
           </div>
 
 
@@ -61,7 +67,7 @@
              <% result = Shop.check(@options,albums_list) %>
              <% result.each do |album| %>
           
-             <%if album.id == @edit['id'].to_i%>
+             <%if album.id == @edit['id'].to_i && @edit['class'] == "album" %>
                 <form action="/albums/<%= album.id %>" method="post">
                  <input type="hidden" name="_method" value="put">
                        <td><input type="text" name="name" value="<%= album.name %>" autofocus></td>
