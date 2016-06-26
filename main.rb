@@ -51,7 +51,7 @@ end
 
 get '/statistics' do
   @albums = Album.all
-  @stats = Shop.statistic_by_genre
+  @stats = Shop.statistic_by_genre(@albums)
   erb :statistics
 end
 
