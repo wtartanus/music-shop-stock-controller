@@ -9,9 +9,7 @@ require_relative( './models/discography.rb' )
 require_relative( './models/shop.rb' )
 
 get '/' do
-  @albums = Album.all
-  @stats = Shop.statistic_by_genre( @albums )
-  
+  @albums = Album.check_low_stock
   erb :home
 end
 

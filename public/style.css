@@ -248,9 +248,24 @@ hr {
   width: 25%;
   position: relative;
   left: 55%;
-  top: 35%;
+  top: 30%;
 
 }
+
+#low-stock {
+  position: relative;
+  left: 55%;
+  top: 35%;
+  max-width: 30%;
+  max-height: 40%;
+  overflow: scroll;
+}
+
+#low-stock-table td {
+  padding: 5px;
+  text-align: center;
+}
+
 
 
 
