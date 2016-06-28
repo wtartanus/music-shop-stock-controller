@@ -57,10 +57,12 @@
             <tr>
             <th>Name</th>
             <th>Genre</th>
+            <th>Shelf</th>
             <th>Buy Price</th>
             <th>Selling Price</th>
             <th>Stock</th>
             <th>Profit</th>
+            
             </tr>
             <tr>
              <% albums_list = artist.albums %>
@@ -72,6 +74,7 @@
                  <input type="hidden" name="_method" value="put">
                        <td><input type="text" name="name" value="<%= album.name %>" autofocus></td>
                        <td><input type="text" name="genre" value="<%= album.genre %>"></td>
+                       <td><input type="text" name="shelf" value="<%= album.shelf %>"></td>
                        <td><input type="text" name="price_buying" value="<%= album.price_buying%>"></td>
                        <td><input type="text" name="price_selling" value="<%= album.price_selling %>"></td>
                        <td class="<%= 'low-stock' if album.stock < 10 %>"> 
@@ -100,10 +103,13 @@
                
                  <td><%= album.name %></td>
                  <td> <%= album.genre %></td>
+                 <td> <%= album.shelf %></td>
                  <td> £<%= album.price_buying%></td>
                  <td> £<%= album.price_selling %></td>
                  <td class="<%= 'low-stock' if album.stock < 10 %>"> 
                  <%= album.stock %></td>
+                 
+                 
                  
                  <td> £<%= Shop.profit( album ) %></td>
             </tr>
