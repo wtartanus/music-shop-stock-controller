@@ -14,6 +14,7 @@ CREATE TABLE albums(
   genre VARCHAR(255),
   price_buying INT4,
   price_selling INT4,
+  shelf VARCHAR(255),
   stock INT4
 );
 

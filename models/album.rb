@@ -2,7 +2,7 @@ class Album
 
 
   attr_reader :id
-  attr_accessor :name, :genre, :price_buying, :price_selling, :stock
+  attr_accessor :name, :genre, :price_buying, :price_selling, :stock, :shelf
 
   def initialize( options )
     @id = options[ 'id' ].to_i
@@ -11,16 +11,18 @@ class Album
     @price_buying = options[ 'price_buying' ].to_i
     @price_selling = options[ 'price_selling' ].to_i
     @stock = options[ 'stock' ].to_i
+    @shelf = options[ 'shelf' ]
   end
 
   def save()
-    sql = "INSERT INTO albums (name, genre, price_buying, price_selling, stock)
+    sql = "INSERT INTO albums (name, genre, price_buying, price_selling, stock, shelf)
          VALUES (
          '#{@name}',
          '#{@genre}',
          #{@price_buying},
          #{@price_selling},
-         #{@stock}) RETURNING *"
+         #{@stock},
+         '#{@shelf}') RETURNING *"
     album = SqlRunner.run( sql ).first
     return Album.new( album )
   end
@@ -53,7 +55,8 @@ class Album
       genre = '#{ options[:genre] }',
       price_buying = #{ options[:price_buying] },
       price_selling = #{ options[:price_selling] },
-      stock = #{ options[:stock] }
+      stock = #{ options[:stock] },
+      shelf = #{ options[:shelf] }
        WHERE id = #{ options[:id] }"
     SqlRunner.run( sql )
   end
