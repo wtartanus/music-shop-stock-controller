@@ -104,15 +104,21 @@ class Discography
     return result
   end
 
+  def self.search_albums_by_shelf(shelf)
+    sql = "SELECT * FROM albums WHERE shelf LIKE '%#{shelf}%'"
+    result = Album.map_items( sql )
+    return result
+  end
+
   def self.search( name )
     if Discography.search_artist( name ) != nil
       return Discography.search_artist( name )
-    else
+    elsif Discography.search_album( name ) != nil
       return Discography.search_album( name )
+    else
+      return Discography.search_albums_by_shelf( name )
     end
   end
-
-
 
 
 end

@@ -21,9 +21,11 @@ get '/stock' do
 end
 
 get '/stock/search' do
+
   @name = params.values.first
   @artists = Artist.all
   @result = Discography.search( @name.downcase )
+  @edit
   if @result.class == Artist
     @artist = @result
     @albums = @artist.albums()
@@ -32,6 +34,8 @@ get '/stock/search' do
     @album = @result
     @artist = @album.artist()
     erb :'album/edit'
+  elsif @result.class == Array
+    erb :'search_array'
   else
     erb :wrong_search
   end
