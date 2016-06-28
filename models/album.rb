@@ -56,7 +56,7 @@ class Album
       price_buying = #{ options[:price_buying] },
       price_selling = #{ options[:price_selling] },
       stock = #{ options[:stock] },
-      shelf = #{ options[:shelf] }
+      shelf = '#{ options[:shelf] }'
        WHERE id = #{ options[:id] }"
     SqlRunner.run( sql )
   end
