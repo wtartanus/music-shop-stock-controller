@@ -110,13 +110,21 @@ class Discography
     return result
   end
 
+  def self.search_albums_by_genre(genre)
+    sql = "SELECT * FROM albums WHERE genre LIKE '%#{genre}%'"
+    result = Album.map_items( sql )
+    return result
+  end
+
   def self.search( name )
     if Discography.search_artist( name ) != nil
       return Discography.search_artist( name )
     elsif Discography.search_album( name ) != nil
       return Discography.search_album( name )
-    else
+    elsif Discography.search_albums_by_shelf( name ).length > 0
       return Discography.search_albums_by_shelf( name )
+    else
+      return Discography.search_albums_by_genre( name )
     end
   end
 

@@ -27,15 +27,18 @@ get '/stock/search' do
   @result = Discography.search( @name.downcase )
   @edit
   if @result.class == Artist
+
     @artist = @result
     @albums = @artist.albums()
     erb :'artist/show'
   elsif @result.class == Album
+
     @album = @result
     @artist = @album.artist()
     erb :'album/edit'
   elsif @result.class == Array
-    erb :'search_array'
+
+     erb :'search_array'
   else
     erb :wrong_search
   end

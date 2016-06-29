@@ -1,78 +1,32 @@
-<table>
- <tr>
- <th>Artist</th>
- <th>Name</th>
- <th>Genre</th>
- <th>Shelf</th>
- <th>Buy Price</th>
- <th>Selling Price</th>
- <th>Stock</th>
- <th>Profit</th>
- 
- </tr>
- <tr>
- 
-  <% @result.each do |album| %>
+<div class="search-array-container">
 
-  <%if album.id == @edit['id'].to_i && @edit['class'] == "album" %>
-     <form action="/albums/<%= album.id %>" method="post">
-      <input type="hidden" name="_method" value="put">
-            <td><input type="text" name="name" value="<%= album.name %>" autofocus></td>
-            <td><input type="text" name="genre" value="<%= album.genre %>"></td>
-            <td><input type="text" name="shelf" value="<%= album.shelf %>"></td>
-            <td><input type="text" name="price_buying" value="<%= album.price_buying%>"></td>
-            <td><input type="text" name="price_selling" value="<%= album.price_selling %>"></td>
-            <td class="<%= 'low-stock' if album.stock < 10 %>"> 
-            <input type="text" name="stock" value="<%= album.stock %>">
-            </td>
-            
-            <td> £<%= Shop.profit( album ) %></td>
-         
-       </tr>
+  <table>
+    <tr>
+      <th>Artist</th>
+      <th>Title</th>
+      <th>Genre</th>
+      <th>Shelf</th>
+      <th>Stock</th>
+      <th>Price Buying</th>
+      <th>Price Selling</th>
+      <th>Profit</th>
+      
+
+      <% @result.each do |album| %>
        <tr>
-        <td colspan="6">
+         <td><%= album.artist.name %></td>
+         <td><%= album.name %></td>
+         <td><%= album.genre %></td>
+         <td><%= album.shelf %></td>
+         <td><%= album.stock %></td>
+         <td>£<%= album.price_buying %></td>
+         <td>£<%= album.price_selling %></td>
+         <td>£<%= Shop.profit( album ) %></td>
          
-           <button type="submit">Save</button>
          
-        </td>
        </tr>
-      </form>
-     <% else %>
-
-
-
-
-
-   
-
-    
-      <td><%= album.name %></td>
-      <td> <%= album.genre %></td>
-      <td> <%= album.shelf %></td>
-      <td> £<%= album.price_buying%></td>
-      <td> £<%= album.price_selling %></td>
-      <td class="<%= 'low-stock' if album.stock < 10 %>"> 
-      <%= album.stock %></td>
-      
-      
-      
-      <td> £<%= Shop.profit( album ) %></td>
- </tr>
- <tr>
-  <td colspan="6">
-   <form action="/albums/<%= album.id %>" method="post">
-     <input type="hidden" name="_method" value="delete">
-     <button><a href="/stock?edit=true&class=album&id=<%=album.id%>">Edit</a></button>
-     <button type="submit">Delete</button>
-   </form>
-  </td>
- </tr>
-
-<%end%>
-
-
+      <% end %>
+    </tr>
+  </table>
   
-   
-
-  <% end %>
- </table>
+</div>

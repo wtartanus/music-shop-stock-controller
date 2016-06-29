@@ -120,7 +120,8 @@ table button {
 
 
 .stock table,
-.artist-container table {
+.artist-container table,
+.search-array-container table {
  margin: 0 auto;
  padding: 5px;
  text-align: center;
@@ -128,14 +129,16 @@ table button {
 }
 
 .stock table th,
-.artist-container table {
+.artist-container table,
+.search-array-container table  {
   padding: 7px;
   color:  #787878;
 
 }
 
 .stock table td,
-.artist-container table  { 
+.artist-container table,
+.search-array-container table   { 
     margin-bottom: 15px;
     margin-left: 15px;
   }
@@ -157,7 +160,8 @@ hr {
 }
 
 .artist-new-container,
-.artist-edit-container {
+.artist-edit-container,
+.search-array-container  {
   height: 550px;
   background-image: url("preview.jpg");
   background-size: 60%;
