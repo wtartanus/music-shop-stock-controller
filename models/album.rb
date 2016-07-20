@@ -2,7 +2,7 @@ class Album
 
 
   attr_reader :id
-  attr_accessor :name, :genre, :price_buying, :price_selling, :stock
+  attr_accessor :name, :genre, :price_buying, :price_selling, :stock, :shelf
 
   def initialize( options )
     @id = options[ 'id' ].to_i
@@ -11,16 +11,18 @@ class Album
     @price_buying = options[ 'price_buying' ].to_i
     @price_selling = options[ 'price_selling' ].to_i
     @stock = options[ 'stock' ].to_i
+    @shelf = options[ 'shelf' ]
   end
 
   def save()
-    sql = "INSERT INTO albums (name, genre, price_buying, price_selling, stock) 
-         VALUES ( 
-         '#{@name}', 
-         '#{@genre}', 
-         #{@price_buying}, 
-         #{@price_selling}, 
-         #{@stock}) RETURNING *"
+    sql = "INSERT INTO albums (name, genre, price_buying, price_selling, stock, shelf)
+         VALUES (
+         '#{@name}',
+         '#{@genre}',
+         #{@price_buying},
+         #{@price_selling},
+         #{@stock},
+         '#{@shelf}') RETURNING *"
     album = SqlRunner.run( sql ).first
     return Album.new( album )
   end
@@ -41,10 +43,6 @@ class Album
   end
 
 
- 
-
-
-
   def self.all()
     sql = "SELECT * FROM albums"
     result = Album.map_items( sql )
@@ -52,14 +50,27 @@ class Album
   end
 
   def self.update( options )
-    sql = "UPDATE albums SET 
+    sql = "UPDATE albums SET
       name = '#{ options[:name] }',
       genre = '#{ options[:genre] }',
       price_buying = #{ options[:price_buying] },
       price_selling = #{ options[:price_selling] },
-      stock = #{ options[:stock] }
+      stock = #{ options[:stock] },
+      shelf = '#{ options[:shelf] }'
        WHERE id = #{ options[:id] }"
     SqlRunner.run( sql )
+  end
+
+  def self.check_low_stock
+    albums = Album.all()
+    albums_low_stock = []
+
+    for album in albums
+      if album.stock < 11
+        albums_low_stock << album
+      end
+    end
+  return albums_low_stock
   end
 
   def self.destroy( id )
@@ -77,6 +88,7 @@ class Album
   def self.map_items( sql )
      albums = SqlRunner.run( sql )
      result = albums.map { |album| Album.new( album ) }
+     result = Shop.capitalize_string(result)
      return result
   end
 

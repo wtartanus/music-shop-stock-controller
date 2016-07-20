@@ -3,7 +3,7 @@ require( 'pry-byebug' )
 
 class Artist
 
-  
+
 
  attr_accessor :name
  attr_reader :id
@@ -26,7 +26,7 @@ class Artist
   end
 
   def albums()
-    sql = " SELECT albums.* FROM albums 
+    sql = " SELECT albums.* FROM albums
     INNER JOIN discography ON albums.id = discography.album_id
     WHERE discography.artist_id = #{ @id } "
     result = Album.map_items( sql )
@@ -41,6 +41,12 @@ class Artist
 
   def self.find( id )
     sql = "SELECT * FROM artists WHERE id = #{ id }"
+    result = Artist.map_item( sql )
+    return result
+  end
+
+  def self.find_by_name( name )
+    sql = "SELECT * FROM artists WHERE name = '#{name}'"
     result = Artist.map_item( sql )
     return result
   end
@@ -63,6 +69,7 @@ class Artist
   def self.map_items( sql )
      artists = SqlRunner.run( sql )
      result = artists.map { |artist| Artist.new( artist) }
+     result = Shop.capitalize_string(result)
      return result
   end
 

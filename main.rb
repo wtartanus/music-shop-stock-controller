@@ -9,31 +9,60 @@ require_relative( './models/discography.rb' )
 require_relative( './models/shop.rb' )
 
 get '/' do
-  @albums = Album.all
-  @stats = Shop.statistic_by_genre( @albums )
+  @albums = Album.check_low_stock
   erb :home
 end
 
 get '/stock' do
-  @artists = Artist.all 
+  @edit = params
+  @artists = Artist.all
   @options = params
-  
-  erb :stock
+  erb :stock_new
 end
 
 get '/stock/search' do
-  name = params.values.first
 
-  @result = Discography.search( name)
- 
+  @name = params.values.first
+  @artists = Artist.all
+  @result = Discography.search( @name.downcase )
+  @edit
   if @result.class == Artist
+
     @artist = @result
     @albums = @artist.albums()
-    erb :'artist/edit'
-  else
+    erb :'artist/show'
+  elsif @result.class == Album
+
     @album = @result
     @artist = @album.artist()
     erb :'album/edit'
+  elsif @result.class == Array
+
+     erb :'search_array'
+  else
+    erb :wrong_search
   end
 
 end
+
+get '/stock/new' do
+  #NEW
+  @artists = Artist.all
+  erb :new
+end
+
+post '/stock' do
+  Discography.save_record( params )
+  redirect to("/stock")
+end
+
+get '/statistics' do
+  @albums = Album.all
+  @stats = Shop.statistic_by_genre(@albums)
+  erb :statistics
+end
+
+
+
+
+

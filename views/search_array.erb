@@ -1,0 +1,32 @@
+<div class="search-array-container">
+
+  <table>
+    <tr>
+      <th>Artist</th>
+      <th>Title</th>
+      <th>Genre</th>
+      <th>Shelf</th>
+      <th>Stock</th>
+      <th>Price Buying</th>
+      <th>Price Selling</th>
+      <th>Profit</th>
+      
+
+      <% @result.each do |album| %>
+       <tr>
+         <td><%= album.artist.name %></td>
+         <td><%= album.name %></td>
+         <td><%= album.genre %></td>
+         <td><%= album.shelf %></td>
+         <td><%= album.stock %></td>
+         <td>£<%= album.price_buying %></td>
+         <td>£<%= album.price_selling %></td>
+         <td>£<%= Shop.profit( album ) %></td>
+         
+         
+       </tr>
+      <% end %>
+    </tr>
+  </table>
+  
+</div>

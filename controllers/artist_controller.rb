@@ -12,7 +12,8 @@ end
 
 get '/artists/new' do
   #NEW
-  erb :'artist/new'
+  @artists = Artist.all
+  erb :'new'
 end
 
 post '/artists' do
@@ -23,7 +24,6 @@ post '/artists' do
 end
 
 get '/artists/:id' do
-  #SHOW
   @artist = Artist.find( params[:id])
   @albums = @artist.albums()
   erb :'artist/show'

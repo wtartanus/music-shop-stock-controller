@@ -1,0 +1,48 @@
+<div class="artist-new-container">
+
+    <div class="artist-new">
+    <h2>Add Record</h2>
+
+    <form action="/stock" method='post' >
+
+     <!-- <label for="name">Artist:</label><br>
+     <input type="text" name="name"><br> -->
+
+
+    <!-- <div class="album-new-container">
+        <div class="album-new">
+          <h2>Add Album</h2> -->
+
+            <label for="artist_id">Artist:</label><br>
+            <input list="artists" type="text" name="artist_name">
+            <datalist id="artists">
+
+            <% @artists.each do |artist|%>
+              <option name="artist" value="<%= artist.name%>"><%= artist.name%></option>
+            <% end %>
+            </datalist><br>
+
+            <label for="name">Name:</label><br>
+            <input type="text" name="name"><br>
+
+            <label for="genre">Genre:</label><br>
+            <input type="text" name="genre"><br>
+
+            <label for="price_buying">Price Buying:</label><br>
+            <input type="text" name="price_buying"><br>
+
+            <label for="price_selling">Price Selling:</label><br>
+            <input type="text" name="price_selling"><br>
+
+            <label for="stock">Stock:</label><br>
+            <input type="text" name="stock"><br>
+
+            <label for="shelf">Shelf:</label><br>
+            <input type="text" name="shelf"><br>
+
+            <input type="submit" value="save">
+              
+            </form>
+  <!--       </div>
+
+</div> -->

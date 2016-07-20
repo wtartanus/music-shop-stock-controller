@@ -31,12 +31,49 @@ class Discography
     return result
   end
 
+  def self.all_records
+    records = []
+    artists = Artist.all
+
+    for artist in artists
+     a = { name: artist.name, albums: []}
+     albums = artist.albums
+      for album in albums 
+          a[:albums] << album
+      
+      end
+     records << a
+    end
+
+    return records
+  end
+
+
  
 
   def album()
     sql = "SELECT * FROM albums WHERE id = '#{@album_id}'"
     result = Album.map_item( sql )
     return result
+  end
+
+  def self.save_record( options )
+    artist = Artist.find_by_name(options['artist_name'].downcase)
+    if artist == nil
+     artist = Artist.new( {'name' => options['artist_name'].downcase} )
+     artist = artist.save()
+    end
+
+    album = Album.new( { 'name' => options['name'].downcase, 
+      'genre' => options['genre'].downcase,
+     'price_buying' => options['price_buying'], 
+     'price_selling' => options['price_selling'], 
+     'stock' => options['stock']} )
+
+    album = album.save()
+
+    record = Discography.new({ 'artist_id' => artist.id, 'album_id' => album.id })
+    record.save()
   end
 
   def self.map_items( sql )
@@ -67,15 +104,29 @@ class Discography
     return result
   end
 
+  def self.search_albums_by_shelf(shelf)
+    sql = "SELECT * FROM albums WHERE shelf LIKE '%#{shelf}%'"
+    result = Album.map_items( sql )
+    return result
+  end
+
+  def self.search_albums_by_genre(genre)
+    sql = "SELECT * FROM albums WHERE genre LIKE '%#{genre}%'"
+    result = Album.map_items( sql )
+    return result
+  end
+
   def self.search( name )
     if Discography.search_artist( name ) != nil
       return Discography.search_artist( name )
-    else
+    elsif Discography.search_album( name ) != nil
       return Discography.search_album( name )
+    elsif Discography.search_albums_by_shelf( name ).length > 0
+      return Discography.search_albums_by_shelf( name )
+    else
+      return Discography.search_albums_by_genre( name )
     end
   end
-
-
 
 
 end

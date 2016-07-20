@@ -119,20 +119,26 @@ table button {
 
 
 
-.stock table {
+.stock table,
+.artist-container table,
+.search-array-container table {
  margin: 0 auto;
  padding: 5px;
  text-align: center;
  margin-bottom: 10px;
 }
 
-.stock table th {
+.stock table th,
+.artist-container table,
+.search-array-container table  {
   padding: 7px;
   color:  #787878;
 
 }
 
-.stock table td { 
+.stock table td,
+.artist-container table,
+.search-array-container table   { 
     margin-bottom: 15px;
     margin-left: 15px;
   }
@@ -154,7 +160,8 @@ hr {
 }
 
 .artist-new-container,
-.artist-edit-container {
+.artist-edit-container,
+.search-array-container  {
   height: 550px;
   background-image: url("preview.jpg");
   background-size: 60%;
@@ -213,6 +220,54 @@ hr {
 
 .low-stock {
   color: red;
+}
+
+.wrong_search {
+  border: 1px solid;
+  height: 550px;
+  background-image: url("note.jpg");
+  background-size: 60%;
+  background-position: right;
+  border: 1px solid white;
+  background-repeat: no-repeat;
+  padding-left: 17%;
+  padding-top: 5%;
+}
+
+.wrong_search p {
+  margin: 5px;
+}
+
+
+.artist-container table {
+  margin: 0 auto;
+}
+
+#welcome-txt {
+  color: white;
+  text-shadow: 1px 1px 5px black;
+  font-family: 'Lilita One', cursive;
+  font-size: 5em;
+  line-height: .5em;
+  width: 25%;
+  position: relative;
+  left: 55%;
+  top: 30%;
+
+}
+
+#low-stock {
+  position: relative;
+  left: 55%;
+  top: 35%;
+  max-width: 30%;
+  max-height: 40%;
+  overflow: scroll;
+}
+
+#low-stock-table td {
+  padding: 5px;
+  text-align: center;
 }
 
 

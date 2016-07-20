@@ -9,6 +9,23 @@ class Shop
     return result
   end
 
+  def self.capitalize_string(array)
+
+    for item in array
+      if item.name.include? " "
+        items = item.name.partition(" ")
+        items.each { |word| word.capitalize! }
+        result = items.join
+        item.name = result
+      else
+        item.name.capitalize!
+      end
+      if item.class == Album
+       item.genre.capitalize!
+      end
+    end
+  end
+
   #SORT FUNCTIONS ###################
 
   def self.sort_genre( albums )
@@ -54,7 +71,7 @@ class Shop
     elsif options[:sort] == "des" && options[:by] == "price_buying_min"
       result = Shop.sort_price_buying_min( albums )
     end
-    return result 
+    return result
   end
 
   ###################################
@@ -71,7 +88,7 @@ class Shop
     genres = albums.map { |album| album.genre }
     genres.uniq!
     for genre_name in genres
-      genre << { "genre" => genre_name , "stock" => 0, 
+      genre << { "genre" => genre_name , "stock" => 0,
         "profit" => 0, "buy_price" => 0 }
     end
     return genre

@@ -1,13 +1,45 @@
-<h1>Artist</h1>
-<p> <%= @artist.name %> </p>
+<div class="artist-container">
 
-<% @albums.each do |album| %>
-  <p> <%= album.name %> </p>
+<h1><%= @artist.name %> </h1>
 
-<% end %>
 
-<a href = "/artists/<%= @artist.id %>/edit">Edit</a>
-<form action="/artists/<%= @artist.id %>" method="post">
- <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Artist">
+<table>
+ <tr>
+ <th>Name</th>
+ <th>Genre</th>
+ <th>Buy Price</th>
+ <th>Selling Price</th>
+ <th>Stock</th>
+ <th>Profit</th>
+ </tr>
+ <tr>
+  <% albums = @artist.albums %>
+  <% albums.each do |album| %>
+  <td><%= album.name %></td>
+  <td> <%= album.genre %></td>
+  <td> £<%= album.price_buying%></td>
+  <td> £<%= album.price_selling %></td>
+  <td class="<%= 'low-stock' if album.stock < 10 %>"> 
+  <%= album.stock %></td>
+  
+  <td> £<%= Shop.profit( album ) %></td>
+ </tr>
+ <tr>
+  <td colspan="6">
+   <form action="/albums/<%= album.id %>" method="post">
+     <input type="hidden" name="_method" value="delete">
+     <button><a href="/albums/<%= album.id %>/edit">Edit</a></button>
+     <button type="submit">Delete</button>
+   </form>
+  </td>
+ </tr>
+
+
+  
+   
+
+  <% end %>
+ </table>
 </form>
+
+</div>
